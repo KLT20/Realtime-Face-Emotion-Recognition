@@ -1,5 +1,7 @@
 #define the architecture of the cnn, localization function and network forward function
 #based off the pytorch tutorial found at https://pytorch.org/tutorials/intermediate/spatial_transformer_tutorial.html
+#channels in and out picked following the instructions in the following Youtube Video: https://www.youtube.com/watch?v=pDdP0TFzsoQ&ab_channel=PythonEngineer
+
 
 import torch
 import torch.nn as nn
@@ -13,18 +15,27 @@ class Emotion(nn.Module):
         
         self.norm = nn.BatchNorm2d(10)
         
+        #in the first layer, the input channel is 1 because FER2013 images are greyscale
         self.layer1 = nn.Conv2d(1,10,3)
+        #in the second input layer, the input channel needs to be equal to the previous channel's output channels
         self.layer2 = nn.Conv2d(10,10,3)
+        # kernel size defines the 3x3 kernel matrix used to do the convolution
         self.layer3 = nn.Conv2d(10,10,3)
         self.layer4 = nn.Conv2d(10,10,3)
         
+        #in the case of Max Pooling, the kernel size is 2 and we shift to the right by 2 pixels at each iteration, thus stride is 2
         self.max_val1 = nn.MaxPool2d(2,2)
         self.max_val2 = nn.MaxPool2d(2,2)
-
+        
+        # here, we are setting up the fully connected layers
+        # the input of nn.Linear is the size of the image after it has passed by all the conv layers,
+        # thus 810  since 10*9*9 = 810 (10 is the number of output channels and 9*9 is the size of the image)
         self.function1 = nn.Linear(810,50)
+        
+        # since we have 7 different classes (types of emotions), our output channel is 7
         self.function2 = nn.Linear(50,7)
         
-        #localization network (Spatial transformer)
+        #localization network (Spatial transformer) in DeepEmotion2019 paper
         self.localization = nn.Sequential(
             nn.Conv2d(1, 8, kernel_size=7),
             nn.MaxPool2d(2, stride=2),
@@ -33,6 +44,7 @@ class Emotion(nn.Module):
             nn.MaxPool2d(2, stride=2),
             nn.ReLU(True)
         )
+        
         #the linear transformation at the end of the localization network
         self.fc_loc = nn.Sequential(
             nn.Linear(640, 32),
