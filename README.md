@@ -26,10 +26,9 @@ __*This project is for educational purposes only.*__
 
 #### CODE:
 - Database: *[FER-2013](https://www.kaggle.com/msambare/fer2013)*
-- Main: *Dataset setup, training loop, and section to test on any image you input.* 
+- Main: *Dataset setup, training loop, and section to test on any image you input + webcam demo(not at peak performance).* 
 - Deep_emotion: *CNN structure with localization function.*
 - Data_loaders: *DataLoader PlainDataset*
 - Generate_data: *Convert data from numbers to images using PIL* 
-- Visualize: *Test data and live demo on webcam.*
 
 
