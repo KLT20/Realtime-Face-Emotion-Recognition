@@ -7,7 +7,7 @@ As a complementary to the bootcamp, here is a project I wanted to tackle: Emotio
 
 The goal is to identify what emotion a person is feeling by looking at a static pitcure or a real-time video of them. 
 
-###### STEPS:
+#### STEPS:
 1) Started by reading the academic paper [DeepEmotion2019](https://arxiv.org/pdf/1902.01019.pdf),
 2) Created my CNN and got stuck on how to convert numbers to images, how to localize faces, and how to make a live webcame demo.
 3) Found out two implementation that went over the correct code
@@ -20,16 +20,16 @@ Then integrated the live demo feature from [DeepLearning_by_PhDScholar](https://
 
 __*This project is for educational purposes only.*__
 
-###### Results:
+#### RESULTS:
 
-![Alt text](/Users/kassa/Desktop/Poster_MAIS202.png?raw=true "Descriptive Poster With Results")
+<img width="383" alt="Poster_MAIS202" src="https://user-images.githubusercontent.com/47719546/114440557-46cb6080-9b98-11eb-917e-f94475c996bb.png">
 
-###### Code:
-Database: *[FER-2013](https://www.kaggle.com/msambare/fer2013)*
-Main: *Dataset setup, training loop, and section to test on any image you input.* 
-Deep_emotion: *CNN structure with localization function.*
-Data_loaders: *DataLoader PlainDataset*
-Generate_data: *Convert data from numbers to images using PIL* 
-Visualize: *Test data and live demo on webcam.*
+#### CODE:
+- Database: *[FER-2013](https://www.kaggle.com/msambare/fer2013)*
+- Main: *Dataset setup, training loop, and section to test on any image you input.* 
+- Deep_emotion: *CNN structure with localization function.*
+- Data_loaders: *DataLoader PlainDataset*
+- Generate_data: *Convert data from numbers to images using PIL* 
+- Visualize: *Test data and live demo on webcam.*
 
 
