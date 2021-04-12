@@ -1,7 +1,10 @@
 #define the architecture of the cnn, localization function and network forward function
-#based off the pytorch tutorial found at https://pytorch.org/tutorials/intermediate/spatial_transformer_tutorial.html
-#channels in and out picked following the instructions in the following Youtube Video: https://www.youtube.com/watch?v=pDdP0TFzsoQ&ab_channel=PythonEngineer
 
+#following @omarsayed7
+
+#complimentary pytorch tutorial found at https://pytorch.org/tutorials/intermediate/spatial_transformer_tutorial.html
+
+#channels numbers understood through the following Youtube Video: https://www.youtube.com/watch?v=pDdP0TFzsoQ&ab_channel=PythonEngineer
 
 import torch
 import torch.nn as nn
