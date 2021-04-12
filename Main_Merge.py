@@ -1,8 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[2]:
-
+#merged @omarsayed7 and DeepLearning_by_PhDScholar's implementation
 
 from __future__ import print_function
 import argparse
@@ -22,9 +18,6 @@ from deep_emotion import Deep_Emotion
 from generate_data import Generate_data
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
-
-# In[3]:
 
 
 def Train(epochs,train_loader,val_loader,criterion,optmizer,device):
@@ -100,97 +93,30 @@ criterion= nn.CrossEntropyLoss()
 optmizer= optim.Adam(net.parameters(),lr= lr)
 Train(epochs, train_loader, val_loader, criterion, optmizer, device)
 
-
-# In[4]:
-
-
-#torch.save(net.state_dict(), 'new_Emotion_trained_Lea.pt')     dont touch this anymore
-
-
-# In[3]:
-
+torch.save(net.state_dict(), 'new_Emotion_trained_Lea.pt')     
 
 net = Deep_Emotion()
 net.load_state_dict(torch.load('new_Emotion_trained_Lea.pt'))
 net.to(device)
 
-
-# In[4]:
-
-
+# Test it on a saved image:
 
 import matplotlib.pyplot as plt
 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[6]:
-
-
 get_ipython().system('pip install opencv-python')
-
-
-# In[11]:
-
 
 import cv2
 
-
-# In[35]:
-
-
 frame = cv2.imread("C:\\Users\\kassa\\11-test\\Deep-Emotion-master\\happy.jpg")
-
-
-# In[13]:
-
 
 get_ipython().system('pip install deepface')
 
-
-# In[14]:
-
-
 from deepface import DeepFace
-
-
-# In[36]:
-
 
 plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
 
-
-# In[37]:
-
-
 faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-
-
-# In[38]:
-
-
 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-
-# In[39]:
-
-
 faces = faceCascade.detectMultiScale(gray, 1.1, 4)
 for x,y,w,h in faces:
     roi_gray = gray [y:y+h, x:x+w]
@@ -202,98 +128,22 @@ for x,y,w,h in faces:
     else:
         for (ex,ey,ew,eh) in facess:
             face_roi = roi_color[ey: ey+eh, ex: ex+ew]
-            
-
-
-# In[52]:
-
-
 plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-
-
-# In[41]:
-
-
 plt.imshow(face_roi)
-
-
-# In[42]:
-
-
 gray = cv2.cvtColor(face_roi, cv2.COLOR_BGR2GRAY)
-
-
-# In[43]:
-
-
 final_image = cv2.resize(gray, (48,48))
-
-
-# In[44]:
-
-
 final_image = np.expand_dims(final_image, axis = 0)
-
-
-# In[45]:
-
-
 final_image = np.expand_dims(final_image, axis = 0)
-
-
-# In[46]:
-
-
 final_image = final_image/255.0
-
-
-# In[47]:
-
-
 dataa = torch.from_numpy(final_image)
-
-
-# In[48]:
-
-
 dataa = dataa.type(torch.FloatTensor)
-
-
-# In[49]:
-
-
 dataa = dataa.to(device)
-
-
-# In[50]:
-
-
 outputs = net(dataa)
 pred = F.softmax(outputs, dim = 1)
-
-
-# In[51]:
-
-
 print(torch.argmax(pred))
-
-
-# In[31]:
-
-
 index_pred = torch.argmax(pred)
-
-
-# In[32]:
-
-
-if (index_pred == 5):
+#if (index_pred == 5):
     print('Just checking the values')
-
-
-# In[33]:
-
-
 
 import cv2
 #pip install opencv-python
@@ -303,12 +153,6 @@ from deepface import DeepFace
 
 
 # Live Demo
-
-# In[34]:
-
-
-
-
 path = "haarcascade_frontalface_default.xml"
 font_scale = 1.5
 font = cv2.FONT_HERSHEY_PLAIN
@@ -447,22 +291,3 @@ while True:
         break
 cap.release()
 cv2.destroyAllWindows()
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
